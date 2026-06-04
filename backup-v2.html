@@ -1,1 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amravati Fan Zone</title>
 
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial, sans-serif;
+}
+
+body{
+background:#000;
+color:white;
+overflow-x:hidden;
+}
+
+/* Opening Screen */
+#splash{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100vh;
+background:#000;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+z-index:9999;
+animation:hideSplash 2s forwards;
+animation-delay:1.8s;
+}
+
+#splash h1{
+color:#FFD700;
+font-size:2rem;
+letter-spacing:3px;
+}
+
+#splash p{
+margin-top:10px;
+color:#ccc;
+}
+
+@keyframes hideSplash{
+to{
+opacity:0;
+visibility:hidden;
+}
+}
+
+/* Hero */
+.hero{
+height:100vh;
+background:
+linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.85)),
+url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1400');
+background-size:cover;
+background-position:center;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+}
+
+.hero-content h1{
+font-size:3rem;
+color:#FFD700;
+margin-bottom:15px;
+}
+
+.hero-content p{
+font-size:1.1rem;
+color:#ddd;
+margin-bottom:25px;
+}
+
+.hero-content button{
+background:#FFD700;
+border:none;
+padding:14px 25px;
+font-size:1rem;
+font-weight:bold;
+border-radius:8px;
+cursor:pointer;
+}
+
+/* Section */
+section{
+padding:50px 20px;
+max-width:1000px;
+margin:auto;
+}
+
+.section-title{
+text-align:center;
+font-size:2rem;
+color:#FFD700;
+margin-bottom:30px;
+}
+
+/* Team Cards */
+
+.team-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+}
+
+.team-card{
+background:#111;
+border:2px solid #222;
+padding:18px;
+border-radius:12px;
+cursor:pointer;
+font-size:1.1rem;
+transition:.3s;
+text-align:center;
+}
+
+.team-card:hover{
+border-color:#FFD700;
+transform:translateY(-3px);
+}
+
+.team-card.selected{
+border-color:#FFD700;
+background:#1b1b1b;
+}
+
+/* Vote Button */
+
+.vote-btn{
+display:block;
+margin:25px auto;
+background:#FFD700;
+border:none;
+padding:14px 30px;
+font-size:1rem;
+font-weight:bold;
+border-radius:8px;
+cursor:pointer;
+}
+
+/* Rankings */
+
+.rankings{
+background:#111;
+padding:20px;
+border-radius:12px;
+}
+
+.rank-item{
+display:flex;
+justify-content:space-between;
+padding:12px 0;
+border-bottom:1px solid #222;
+}
+
+/* Footer */
+
+footer{
+padding:30px;
+text-align:center;
+background:#0b0b0b;
+color:#aaa;
+margin-top:40px;
+}
+
+footer strong{
+color:#FFD700;
+}
+
+@media(max-width:600px){
+
+.hero-content h1{
+font-size:2.2rem;
+}
+
+.hero-content p{
+font-size:.95rem;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<div id="splash">
+<h1>AMRAVATI FAN ZONE</h1>
+<p>Presented by Furnishing Spaces</p>
+</div>
+
+<div class="hero">
+<div class="hero-content">
+<h1>AMRAVATI FAN ZONE</h1>
+<p>Vote. Predict. Support.</p>
+<button onclick="document.getElementById('vote').scrollIntoView({behavior:'smooth'})">
+START VOTING
+</button>
+</div>
+</div>
+
+<section id="vote">
+
+<h2 class="section-title">Choose Your Team</h2>
+
+<div class="team-grid">
+
+<div class="team-card" onclick="selectTeam(this)">
+🇦🇷 Argentina
+</div>
+
+<div class="team-card" onclick="selectTeam(this)">
+🇧🇷 Brazil
+</div>
+
+<div class="team-card" onclick="selectTeam(this)">
+🇵🇹 Portugal
+</div>
+
+<div class="team-card" onclick="selectTeam(this)">
+🇫🇷 France
+</div>
+
+<div class="team-card" onclick="selectTeam(this)">
+🇩🇪 Germany
+</div>
+
+<div class="team-card" onclick="selectTeam(this)">
+🏴 England
+</div>
+
+<div class="team-card" onclick="selectTeam(this)">
+🇪🇸 Spain
+</div>
+
+</div>
+
+<button class="vote-btn">
+VOTE NOW
+</button>
+
+</section>
+
+<section>
+
+<h2 class="section-title">Live Rankings</h2>
+
+<div class="rankings">
+
+<div class="rank-item">
+<span>🇦🇷 Argentina</span>
+<span>0</span>
+</div>
+
+<div class="rank-item">
+<span>🇧🇷 Brazil</span>
+<span>0</span>
+</div>
+
+<div class="rank-item">
+<span>🇵🇹 Portugal</span>
+<span>0</span>
+</div>
+
+<div class="rank-item">
+<span>🇫🇷 France</span>
+<span>0</span>
+</div>
+
+<div class="rank-item">
+<span>🇩🇪 Germany</span>
+<span>0</span>
+</div>
+
+<div class="rank-item">
+<span>🏴 England</span>
+<span>0</span>
+</div>
+
+<div class="rank-item">
+<span>🇪🇸 Spain</span>
+<span>0</span>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+Presented by <strong>Furnishing Spaces</strong> 🏠
+</footer>
+
+<script>
+
+function selectTeam(card){
+
+document.querySelectorAll('.team-card')
+.forEach(c=>c.classList.remove('selected'));
+
+card.classList.add('selected');
+
+}
+
+</script>
+
+</body>
+</html>
