@@ -135,23 +135,87 @@ START VOTING
 Presented by <strong>Furnishing Spaces</strong>
 </footer>
 
-<script>
-let selectedTeam="";
+<script type="module">
 
-function selectTeam(card){
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import {
+getFirestore,
+doc,
+getDoc,
+updateDoc
+} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC3a3DDVzLJEQs3ulYWJxJSCOG52IfX97U",
+  authDomain: "amravatifanzone-8b19d.firebaseapp.com",
+  projectId: "amravatifanzone-8b19d",
+  storageBucket: "amravatifanzone-8b19d.firebasestorage.app",
+  messagingSenderId: "703541486260",
+  appId: "1:703541486260:web:059edd4fd0b6a32e276de1",
+  measurementId: "G-MXB9CLY2JG"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+let selectedTeam = "";
+
+window.selectTeam = function(card){
+
 document.querySelectorAll('.team-card')
 .forEach(c=>c.classList.remove('selected'));
+
 card.classList.add('selected');
-selectedTeam=card.innerText;
+
+selectedTeam = card.innerText
+.replace("🇦🇷","")
+.replace("🇧🇷","")
+.replace("🇵🇹","")
+.replace("🇫🇷","")
+.replace("🇩🇪","")
+.replace("🏴","")
+.replace("🇪🇸","")
+.trim()
+.toLowerCase();
+
 }
 
-function voteTeam(){
+window.voteTeam = async function(){
+
 if(selectedTeam===""){
 alert("Please select a team first.");
 return;
 }
-alert("✅ Vote Recorded!\\n\\nThank you for supporting your team.");
+
+try{
+
+const voteRef = doc(db,"Votes",selectedTeam);
+
+const snap = await getDoc(voteRef);
+
+if(!snap.exists()){
+alert("Team not found in Firebase.");
+return;
 }
+
+const currentCount = snap.data().count || 0;
+
+await updateDoc(voteRef,{
+count: currentCount + 1
+});
+
+alert("✅ Vote Recorded!\n\nThank you for supporting your team.");
+
+}
+catch(err){
+
+console.error(err);
+alert("Firebase Error");
+
+}
+
+}
+
 </script>
 
 </body>
