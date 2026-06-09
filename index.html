@@ -130,6 +130,25 @@ Loading...
 </div>
 <div class="total">🔥 Total Votes: 0</div>
 
+<div id="fanWar" style="
+background:#111;
+border:2px solid #ff4d4d;
+border-radius:15px;
+padding:20px;
+margin-bottom:25px;
+text-align:center;
+">
+
+<h2 style="color:#ff4d4d;margin-bottom:15px;">
+⚔️ FAN WAR
+</h2>
+
+<div id="battleContainer">
+Loading Battle...
+</div>
+
+</div>
+
 <h2 class="section-title">Live Rankings</h2>
 
 <div class="rankings">
@@ -231,6 +250,42 @@ const favorite = teams[0];
 
 document.getElementById("favoriteTeam").innerHTML =
 `👑 ${favorite.name}<br><span style="font-size:1rem;color:#FFD700;">${favorite.count} Votes</span>`;
+
+}
+
+const battleTeams = teams.filter(team =>
+["brazil","argentina","portugal"].includes(team.name.toLowerCase())
+);
+
+let battleHTML = "";
+
+battleTeams.forEach(team=>{
+battleHTML += `
+<div style="
+display:flex;
+justify-content:space-between;
+padding:10px 0;
+border-bottom:1px solid #222;
+">
+<span>${team.name}</span>
+<span>${team.count}</span>
+</div>
+`;
+});
+
+if(battleTeams.length > 0){
+
+battleHTML += `
+<div style="
+margin-top:15px;
+color:#00ff66;
+font-weight:bold;
+">
+🔥 Battle Leader: ${battleTeams[0].name}
+</div>
+`;
+
+document.getElementById("battleContainer").innerHTML = battleHTML;
 
 }
 
