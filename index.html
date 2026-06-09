@@ -109,6 +109,25 @@ START VOTING
 </section>
 
 <section>
+
+<div id="fanFavorite" style="
+background:#111;
+border:2px solid #FFD700;
+border-radius:15px;
+padding:20px;
+text-align:center;
+margin-bottom:20px;
+">
+
+<h3 style="color:#FFD700;margin-bottom:10px;">
+👑 CURRENT FAN FAVORITE
+</h3>
+
+<div id="favoriteTeam" style="font-size:1.4rem;font-weight:bold;">
+Loading...
+</div>
+
+</div>
 <div class="total">🔥 Total Votes: 0</div>
 
 <h2 class="section-title">Live Rankings</h2>
@@ -205,6 +224,15 @@ html += `
 });
 
 document.getElementById("rankingsContainer").innerHTML = html;
+
+if(teams.length > 0){
+
+const favorite = teams[0];
+
+document.getElementById("favoriteTeam").innerHTML =
+`${favorite.name}<br><span style="font-size:1rem;color:#FFD700;">${favorite.count} Votes</span>`;
+
+}
 
 const totalElement = document.querySelector(".total");
 
