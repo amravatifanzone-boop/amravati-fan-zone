@@ -114,13 +114,11 @@ START VOTING
 <h2 class="section-title">Live Rankings</h2>
 
 <div class="rankings">
-<div class="rank-item"><span>🥇 🇦🇷 Argentina</span><span>0</span></div>
-<div class="rank-item"><span>🥈 🇧🇷 Brazil</span><span>0</span></div>
-<div class="rank-item"><span>🥉 🇵🇹 Portugal</span><span>0</span></div>
-<div class="rank-item"><span>4️⃣ 🇫🇷 France</span><span>0</span></div>
-<div class="rank-item"><span>5️⃣ 🇩🇪 Germany</span><span>0</span></div>
-<div class="rank-item"><span>6️⃣ 🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</span><span>0</span></div>
-<div class="rank-item"><span>7️⃣ 🇪🇸 Spain</span><span>0</span></div>
+  
+<div id="rankingsContainer">
+Loading rankings...
+</div>
+  
 </div>
 </section>
 
@@ -142,7 +140,9 @@ import {
 getFirestore,
 doc,
 getDoc,
-updateDoc
+updateDoc,
+collection,
+getDocs
 } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -157,6 +157,52 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+async function loadRankings(){
+
+const snapshot = await getDocs(collection(db,"Votes"));
+
+let teams = [];
+let totalVotes = 0;
+
+snapshot.forEach((teamDoc)=>{
+
+const count = teamDoc.data().count || 0;
+
+teams.push({
+name: teamDoc.id,
+count: count
+});
+
+totalVotes += count;
+
+});
+
+teams.sort((a,b)=>b.count-a.count);
+
+const medals = ["🥇","🥈","🥉","4️⃣","5️⃣","6️⃣","7️⃣"];
+
+let html = "";
+
+teams.forEach((team,index)=>{
+
+html += `
+<div class="rank-item">
+<span>${medals[index]} ${team.name}</span>
+<span>${team.count}</span>
+</div>
+`;
+
+});
+
+document.getElementById("rankingsContainer").innerHTML = html;
+
+const totalElement = document.querySelector(".total");
+
+if(totalElement){
+totalElement.innerHTML = "🔥 Total Votes: " + totalVotes;
+}
+
+}
 
 let selectedTeam = "";
 
@@ -204,6 +250,8 @@ await updateDoc(voteRef,{
 count: currentCount + 1
 });
 
+await loadRankings();
+
 alert("✅ Vote Recorded!\n\nThank you for supporting your team.");
 
 }
@@ -215,6 +263,8 @@ alert("Firebase Error");
 }
 
 }
+
+loadRankings();
 
 </script>
 
