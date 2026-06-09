@@ -205,6 +205,8 @@ totalElement.innerHTML = "🔥 Total Votes: " + totalVotes;
 }
 
 let selectedTeam = "";
+  
+const hasVoted = localStorage.getItem("afz_voted");
 
 window.selectTeam = function(card){
 
@@ -233,6 +235,11 @@ alert("Please select a team first.");
 return;
 }
 
+if(localStorage.getItem("afz_voted")){
+alert("⚽ You have already voted!");
+return;
+}
+
 try{
 
 const voteRef = doc(db,"Votes",selectedTeam);
@@ -249,6 +256,8 @@ const currentCount = snap.data().count || 0;
 await updateDoc(voteRef,{
 count: currentCount + 1
 });
+
+localStorage.setItem("afz_voted","yes");
 
 await loadRankings();
 
