@@ -359,7 +359,7 @@ await loadRankings();
 
 alert(selectedTeam);
 
-if(selectedTeam.includes("Brazil")){
+if(selectedTeam.toLowerCase().includes("brazil")){
 
 alert("BRAZIL BLOCK HIT");
 
@@ -372,7 +372,7 @@ colors:["green","yellow","blue"]
 
 }
 
-else if(selectedTeam.includes("Argentina")){
+else if(selectedTeam.toLowerCase().includes("argentina")){
 
 confetti({
 particleCount:120,
@@ -383,7 +383,7 @@ colors:["#74ACDF","#FFFFFF","#74ACDF"]
 
 }
 
-else if(selectedTeam.includes("Portugal")){
+else if(selectedTeam.toLowerCase().includes("portugal")){
 
 confetti({
 particleCount:120,
