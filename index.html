@@ -357,17 +357,13 @@ localStorage.setItem("afz_voted","yes");
 
 await loadRankings();
 
-alert(selectedTeam);
-
 if(selectedTeam.toLowerCase().includes("brazil")){
-
-alert("BRAZIL BLOCK HIT");
 
 confetti({
 particleCount:120,
 spread:90,
 origin:{ y:0.6 },
-colors:["green","yellow","blue"]
+colors:["#00D84A","#FFD700","#1E90FF"]
 });
 
 }
