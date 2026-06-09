@@ -357,18 +357,18 @@ localStorage.setItem("afz_voted","yes");
 
 await loadRankings();
 
-if(selectedTeam === "🇧🇷 Brazil"){
+if(selectedTeam.includes("Brazil")){
 
 confetti({
 particleCount:120,
 spread:90,
 origin:{ y:0.6 },
-colors:["#009C3B","#FFDF00","#002776"]
+colors:["green","yellow","blue"]
 });
 
 }
 
-else if(selectedTeam === "🇦🇷 Argentina"){
+else if(selectedTeam.includes("Argentina")){
 
 confetti({
 particleCount:120,
@@ -379,7 +379,7 @@ colors:["#74ACDF","#FFFFFF","#74ACDF"]
 
 }
 
-else if(selectedTeam === "🇵🇹 Portugal"){
+else if(selectedTeam.includes("Portugal")){
 
 confetti({
 particleCount:120,
