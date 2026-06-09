@@ -357,11 +357,48 @@ localStorage.setItem("afz_voted","yes");
 
 await loadRankings();
 
+if(selectedTeam === "BR Brazil"){
+
 confetti({
-particleCount: 120,
-spread: 90,
-origin: { y: 0.6 }
-}); 
+particleCount:120,
+spread:90,
+origin:{ y:0.6 },
+colors:["#009C3B","#FFDF00","#002776"]
+});
+
+}
+
+else if(selectedTeam === "AR Argentina"){
+
+confetti({
+particleCount:120,
+spread:90,
+origin:{ y:0.6 },
+colors:["#74ACDF","#FFFFFF","#74ACDF"]
+});
+
+}
+
+else if(selectedTeam === "PT Portugal"){
+
+confetti({
+particleCount:120,
+spread:90,
+origin:{ y:0.6 },
+colors:["#046A38","#DA291C"]
+});
+
+}
+
+else{
+
+confetti({
+particleCount:120,
+spread:90,
+origin:{ y:0.6 }
+});
+
+}
 
 alert("✅ Vote Recorded!\n\nThank you for supporting your team.");
 
