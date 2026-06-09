@@ -73,6 +73,9 @@ text-align:center;padding:25px;background:#0b0b0b;color:#aaa;margin-top:40px;
 .hero-content h1{font-size:2.8rem}
 }
 </style>
+  
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  
 </head>
 <body>
 
@@ -353,6 +356,12 @@ count: currentCount + 1
 localStorage.setItem("afz_voted","yes");
 
 await loadRankings();
+
+confetti({
+particleCount: 120,
+spread: 90,
+origin: { y: 0.6 }
+}); 
 
 alert("✅ Vote Recorded!\n\nThank you for supporting your team.");
 
