@@ -168,8 +168,18 @@ snapshot.forEach((teamDoc)=>{
 
 const count = teamDoc.data().count || 0;
 
+const teamNames = {
+argentina:"🇦🇷 Argentina",
+brazil:"🇧🇷 Brazil",
+portugal:"🇵🇹 Portugal",
+france:"🇫🇷 France",
+germany:"🇩🇪 Germany",
+england:"🏴 England",
+spain:"🇪🇸 Spain"
+};
+
 teams.push({
-name: teamDoc.id,
+name: teamNames[teamDoc.id],
 count: count
 });
 
