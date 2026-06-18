@@ -742,11 +742,17 @@ const teamName =
 team[0].charAt(0).toUpperCase() +
 team[0].slice(1);
 
+let medal = "";
+
+if(index === 0) medal = "🥇 ";
+if(index === 1) medal = "🥈 ";
+if(index === 2) medal = "🥉 ";
+
 return `
 <div class="prediction-row">
 <span>
 <div class="rank-circle">${index+1}</div>
-${flags[team[0]] || ""} ${teamName}
+${medal}${flags[team[0]] || ""} ${teamName}
 </span>
 <span>${team[1]}</span>
 </div>
