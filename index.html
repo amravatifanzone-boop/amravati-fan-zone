@@ -305,7 +305,7 @@ Loading rankings...
 No team selected
 </p>
 
-<button class="vote-btn">
+<button class="vote-btn" id="predictBtn">
 PREDICT NOW 🎯
 </button>
 
@@ -628,6 +628,18 @@ alert("Firebase Error");
 loadRankings();
 
 let selectedPrediction = "";
+const predictBtn = document.getElementById("predictBtn");
+
+predictBtn.addEventListener("click", async () => {
+
+if(!selectedPrediction){
+alert("Select a team first!");
+return;
+}
+
+alert("Prediction submitted for " + selectedPrediction);
+
+});
 
 const predictionCards =
 document.querySelectorAll(".prediction-options .team-card");
