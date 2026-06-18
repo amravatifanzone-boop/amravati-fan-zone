@@ -61,6 +61,30 @@ padding:10px 0;border-bottom:1px solid #222;
 
 .total{text-align:center;margin-bottom:15px;font-size:1.1rem}
 
+.prediction-rankings{
+background:#111;
+padding:20px;
+border-radius:12px;
+margin-top:30px;
+}
+
+.prediction-rankings h2{
+text-align:center;
+color:#FFD700;
+margin-bottom:20px;
+}
+
+.prediction-row{
+display:flex;
+justify-content:space-between;
+padding:12px 0;
+border-bottom:1px solid #222;
+}
+
+.prediction-row:last-child{
+border-bottom:none;
+}
+
 .coming{
 text-align:center;padding:25px;background:#111;border-radius:12px;
 }
@@ -316,6 +340,15 @@ Prediction System Coming Soon
 </div>
 
 </section>
+
+<section class="prediction-rankings">
+<h2>🏆 Prediction Rankings</h2>
+
+<div id="predictionRankings">
+Loading predictions...
+</div>
+</section>
+
 <footer>
 Presented by <strong>Furnishing Spaces</strong>
 </footer>
@@ -626,6 +659,7 @@ alert("Firebase Error");
 }
 
 loadRankings();
+loadPredictionRankings();
 
 let selectedPrediction = "";
 let predictionKey = "";
@@ -654,12 +688,35 @@ await updateDoc(predictionRef,{
 [predictionKey]: currentCount + 1
 });
 
+await loadPredictionRankings();
+
 localStorage.setItem("afz_predicted","yes");
 
 alert("✅ Prediction submitted for " + selectedPrediction);
 
 });
 
+async function loadPredictionRankings(){
+
+const predictionRef = doc(db,"predictions","totals");
+const predictionSnap = await getDoc(predictionRef);
+
+if(!predictionSnap.exists()) return;
+
+const data = predictionSnap.data();
+
+const sortedTeams = Object.entries(data)
+.sort((a,b) => b[1]-a[1]);
+
+document.getElementById("predictionRankings").innerHTML =
+sortedTeams.map((team,index)=>`
+<div class="prediction-row">
+<span>${index+1}. ${team[0]}</span>
+<span>${team[1]}</span>
+</div>
+`).join("");
+
+}
 const predictionCards =
 document.querySelectorAll(".prediction-options .team-card");
 
