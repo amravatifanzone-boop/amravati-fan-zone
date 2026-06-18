@@ -97,6 +97,20 @@ transform:scale(1);
 opacity:1;
 }
 }
+.gold-card{
+border:2px solid gold !important;
+box-shadow:0 0 15px rgba(255,215,0,0.4);
+}
+
+.silver-card{
+border:2px solid silver !important;
+box-shadow:0 0 15px rgba(192,192,192,0.4);
+}
+
+.bronze-card{
+border:2px solid #cd7f32 !important;
+box-shadow:0 0 15px rgba(205,127,50,0.4);
+}
 </style>
   
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
@@ -264,7 +278,7 @@ let html = "";
 teams.forEach((team,index)=>{
 
 html += `
-<div class="rank-item">
+<div class="rank-item ${index===0 ? 'gold-card' : index===1 ? 'silver-card' : index===2 ? 'bronze-card' : ''}">
 <span>${medals[index]} ${team.name}</span>
 <span>${team.count}</span>
 </div>
