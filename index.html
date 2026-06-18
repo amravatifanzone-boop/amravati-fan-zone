@@ -260,18 +260,53 @@ const battleTeams = teams.filter(team =>
 ["🇧🇷 brazil","🇦🇷 argentina","🇵🇹 portugal"].includes(team.name.toLowerCase())
 );
 
+const battleTotal = battleTeams.reduce(
+(sum,team)=> sum + team.count,
+0
+);
+
 let battleHTML = "";
 
 battleTeams.forEach(team=>{
+  
+const percent = battleTotal > 0
+? Math.round((team.count / battleTotal) * 100)
+: 0;
+
 battleHTML += `
+<div style="
+padding:12px 0;
+border-bottom:1px solid #222;
+">
+
 <div style="
 display:flex;
 justify-content:space-between;
-padding:10px 0;
-border-bottom:1px solid #222;
+margin-bottom:6px;
 ">
+
 <span>${team.name}</span>
-<span>${team.count}</span>
+<span>${percent}%</span>
+
+</div>
+
+<div style="
+height:8px;
+background:#222;
+border-radius:20px;
+overflow:hidden;
+">
+
+<div style="
+height:100%;
+width:${percent}%;
+background:#FFD700;
+border-radius:20px;
+transition:0.5s;
+"></div>
+
+</div>
+
 </div>
 `;
 });
