@@ -676,17 +676,9 @@ card.classList.add("selected");
 selectedPrediction = card.innerText;
 
 predictionKey = selectedPrediction
-.replace("🇧🇷 ","")
-.replace("🇦🇷 ","")
-.replace("🇵🇹 ","")
-.replace("🇫🇷 ","")
-.replace("🇩🇪 ","")
-.replace("🏴󠁧󠁢󠁥󠁮󠁧󠁿 ","")
-.replace("🇪🇸 ","")
-.replace("🇳🇱 ","")
-.replace("🇲🇦 ","")
-.replace("🇧🇪 ","")
-.toLowerCase();
+.toLowerCase()
+.replace(/[^a-z ]/g,"")
+.trim();
 
 document.getElementById("selectedPrediction").innerText =
 "🎯 Selected: " + selectedPrediction;
