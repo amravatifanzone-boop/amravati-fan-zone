@@ -154,6 +154,29 @@ font-weight:bold;
 font-size:14px;
 margin-right:10px;
 }
+.prediction-options{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:20px;
+margin-bottom:20px;
+}
+
+.team-card{
+background:#111;
+border:1px solid #222;
+padding:12px;
+border-radius:12px;
+text-align:center;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+.team-card:hover{
+border-color:#FFD700;
+transform:translateY(-2px);
+}
 </style>
   
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
@@ -249,12 +272,40 @@ Loading rankings...
 </section>
 
 <section>
-<div class="coming">
-<h2>🎯 Prediction Contest</h2>
-<p>Coming Soon</p>
-</div>
-</section>
 
+<div class="coming">
+
+<h2>🎯 Predict The World Cup Winner</h2>
+
+<div class="prediction-options">
+
+<div class="team-card">🇧🇷 Brazil</div>
+
+<div class="team-card">🇦🇷 Argentina</div>
+
+<div class="team-card">🇵🇹 Portugal</div>
+
+<div class="team-card">🇫🇷 France</div>
+
+<div class="team-card">🇩🇪 Germany</div>
+
+<div class="team-card">🏴 England</div>
+
+<div class="team-card">🇪🇸 Spain</div>
+
+</div>
+
+<button class="vote-btn">
+PREDICT NOW 🎯
+</button>
+
+<p style="margin-top:15px;color:#999;">
+Prediction System Coming Soon
+</p>
+
+</div>
+
+</section>
 <footer>
 Presented by <strong>Furnishing Spaces</strong>
 </footer>
