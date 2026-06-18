@@ -140,6 +140,20 @@ background:linear-gradient(135deg,#3a2414,#111);
 border:2px solid #b87333;
 box-shadow:0 0 20px rgba(184,115,51,0.3);
 }
+.rank-badge{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+width:28px;
+height:28px;
+border-radius:50%;
+background:#111;
+border:1px solid #333;
+color:#FFD700;
+font-weight:bold;
+font-size:14px;
+margin-right:10px;
+}
 </style>
   
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
@@ -301,7 +315,7 @@ totalVotes += count;
 
 teams.sort((a,b)=>b.count-a.count);
 
-const medals = ["#1","#2","#3","#4","#5","#6","#7"];
+const medals = [];
 
 let html = "";
 
@@ -309,7 +323,7 @@ teams.forEach((team,index)=>{
 
 html += `
 <div class="rank-item">
-<span>${medals[index]} ${team.name}</span>
+<span><span class="rank-badge">${index+1}</span>${team.name}</span>
 <span>${team.count}</span>
 </div>
 `;
