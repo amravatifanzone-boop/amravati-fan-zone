@@ -77,12 +77,26 @@ margin-bottom:20px;
 .prediction-row{
 display:flex;
 justify-content:space-between;
+align-items:center;
 padding:12px 0;
 border-bottom:1px solid #222;
 }
 
 .prediction-row:last-child{
 border-bottom:none;
+}
+
+.rank-circle{
+width:32px;
+height:32px;
+border:1px solid #444;
+border-radius:50%;
+display:inline-flex;
+align-items:center;
+justify-content:center;
+margin-right:10px;
+font-weight:bold;
+color:#FFD700;
 }
 
 .coming{
@@ -709,13 +723,36 @@ const sortedTeams = Object.entries(data)
 .sort((a,b) => b[1]-a[1]);
 
 document.getElementById("predictionRankings").innerHTML =
-sortedTeams.map((team,index)=>`
+sortedTeams.map((team,index)=>{
+
+const flags = {
+argentina:"🇦🇷",
+belgium:"🇧🇪",
+brazil:"🇧🇷",
+england:"🏴",
+france:"🇫🇷",
+germany:"🇩🇪",
+morocco:"🇲🇦",
+netherlands:"🇳🇱",
+portugal:"🇵🇹",
+spain:"🇪🇸"
+};
+
+const teamName =
+team[0].charAt(0).toUpperCase() +
+team[0].slice(1);
+
+return `
 <div class="prediction-row">
-<span>${index+1}. ${team[0]}</span>
+<span>
+<div class="rank-circle">${index+1}</div>
+${flags[team[0]] || ""} ${teamName}
+</span>
 <span>${team[1]}</span>
 </div>
-`).join("");
+`;
 
+}).join("");
 }
 const predictionCards =
 document.querySelectorAll(".prediction-options .team-card");
