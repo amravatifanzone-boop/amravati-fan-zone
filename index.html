@@ -293,7 +293,17 @@ Loading rankings...
 
 <div class="team-card">🇪🇸 Spain</div>
 
+<div class="team-card">🇳🇱 Netherlands</div>
+
+<div class="team-card">🇮🇹 Italy</div>
+
+<div class="team-card">🇧🇪 Belgium</div>
+
 </div>
+
+<p id="selectedPrediction" style="margin:20px 0;color:#FFD700;font-weight:bold;">
+No team selected
+</p>
 
 <button class="vote-btn">
 PREDICT NOW 🎯
@@ -617,6 +627,29 @@ alert("Firebase Error");
 
 loadRankings();
 
+let selectedPrediction = "";
+
+const predictionCards =
+document.querySelectorAll(".prediction-options .team-card");
+
+predictionCards.forEach(card => {
+
+card.addEventListener("click", () => {
+
+predictionCards.forEach(c =>
+c.classList.remove("selected")
+);
+
+card.classList.add("selected");
+
+selectedPrediction = card.innerText;
+
+document.getElementById("selectedPrediction").innerText =
+"🎯 Selected: " + selectedPrediction;
+
+});
+
+});
 </script>
 
 </body>
