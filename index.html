@@ -111,6 +111,35 @@ box-shadow:0 0 15px rgba(192,192,192,0.4);
 border:2px solid #cd7f32 !important;
 box-shadow:0 0 15px rgba(205,127,50,0.4);
 }
+.top-three{
+margin-bottom:20px;
+}
+
+.podium-card{
+padding:18px;
+border-radius:15px;
+margin-bottom:12px;
+text-align:center;
+font-weight:bold;
+}
+
+.gold-podium{
+background:linear-gradient(135deg,#3a2d00,#111);
+border:2px solid gold;
+box-shadow:0 0 20px rgba(255,215,0,0.35);
+}
+
+.silver-podium{
+background:linear-gradient(135deg,#2b2b2b,#111);
+border:2px solid #d9d9d9;
+box-shadow:0 0 20px rgba(255,255,255,0.2);
+}
+
+.bronze-podium{
+background:linear-gradient(135deg,#3a2414,#111);
+border:2px solid #b87333;
+box-shadow:0 0 20px rgba(184,115,51,0.3);
+}
 </style>
   
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
@@ -191,6 +220,7 @@ Loading Battle...
 
 </div>
 
+<div id="topThreeContainer"></div>
 <h2 class="section-title">
 <span class="live-dot"></span> LIVE Rankings
 </h2>
@@ -286,6 +316,38 @@ html += `
 
 });
 
+let podiumHTML = `
+<div class="top-three">
+<h2 class="section-title">🏆 TOP 3 TEAMS</h2>
+`;
+
+if(teams[0]){
+podiumHTML += `
+<div class="podium-card gold-podium">
+🥇 ${teams[0].name}<br>
+${teams[0].count} Votes
+</div>`;
+}
+
+if(teams[1]){
+podiumHTML += `
+<div class="podium-card silver-podium">
+🥈 ${teams[1].name}<br>
+${teams[1].count} Votes
+</div>`;
+}
+
+if(teams[2]){
+podiumHTML += `
+<div class="podium-card bronze-podium">
+🥉 ${teams[2].name}<br>
+${teams[2].count} Votes
+</div>`;
+}
+
+podiumHTML += `</div>`;
+
+document.getElementById("topThreeContainer").innerHTML = podiumHTML;
 document.getElementById("rankingsContainer").innerHTML = html;
 
 if(teams.length > 0){
