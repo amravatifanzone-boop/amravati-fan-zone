@@ -628,6 +628,7 @@ alert("Firebase Error");
 loadRankings();
 
 let selectedPrediction = "";
+let predictionKey = "";
 const predictBtn = document.getElementById("predictBtn");
 
 predictBtn.addEventListener("click", async () => {
@@ -637,7 +638,18 @@ alert("Select a team first!");
 return;
 }
 
-alert("Prediction submitted for " + selectedPrediction);
+const predictionRef = doc(db,"predictions","totals");
+
+const predictionSnap = await getDoc(predictionRef);
+
+const currentCount =
+predictionSnap.data()[predictionKey] || 0;
+
+await updateDoc(predictionRef,{
+[predictionKey]: currentCount + 1
+});
+
+alert("✅ Prediction submitted for " + selectedPrediction);
 
 });
 
@@ -655,6 +667,19 @@ c.classList.remove("selected")
 card.classList.add("selected");
 
 selectedPrediction = card.innerText;
+
+predictionKey = selectedPrediction
+.replace("🇧🇷 ","")
+.replace("🇦🇷 ","")
+.replace("🇵🇹 ","")
+.replace("🇫🇷 ","")
+.replace("🇩🇪 ","")
+.replace("🏴 ","")
+.replace("🇪🇸 ","")
+.replace("🇳🇱 ","")
+.replace("🇮🇹 ","")
+.replace("🇧🇪 ","")
+.toLowerCase();
 
 document.getElementById("selectedPrediction").innerText =
 "🎯 Selected: " + selectedPrediction;
