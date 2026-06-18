@@ -638,6 +638,11 @@ alert("Select a team first!");
 return;
 }
 
+if(localStorage.getItem("afz_predicted")){
+alert("🎯 You have already submitted a prediction!");
+return;
+}
+
 const predictionRef = doc(db,"predictions","totals");
 
 const predictionSnap = await getDoc(predictionRef);
@@ -648,6 +653,8 @@ predictionSnap.data()[predictionKey] || 0;
 await updateDoc(predictionRef,{
 [predictionKey]: currentCount + 1
 });
+
+localStorage.setItem("afz_predicted","yes");
 
 alert("✅ Prediction submitted for " + selectedPrediction);
 
